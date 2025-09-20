@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marn Store
 
-## Getting Started
+**Marn Store** is a London-based menswear ecommerce site built with Next.js, TypeScript, and Tailwind CSS. It focuses on formal and smart casual fashion for men, offering a clean, modern shopping experience.
 
-First, run the development server:
+## 👔 About the Brand
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Marn is a minimalist menswear brand inspired by British tailoring and smart urban style. This site is the first official ecommerce platform for the brand, designed to reflect its refined aesthetic and London roots.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js (TypeScript)
+- **Styling**: Tailwind CSS
+- **Version Control**: GitHub
+- **Project Planning**: Asana (Free Tier)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📈 Project Goals
 
-## Learn More
+- Build a scalable, responsive ecommerce site from scratch
+- Apply advanced UI/UX patterns using Tailwind and Next.js
+- Track development progress and structure using GitHub and Asana
+- Transition from practice projects to a production-ready retail platform
 
-To learn more about Next.js, take a look at the following resources:
+## 🧪 Development Journey
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project follows two earlier practice builds stored in [`nextjs-project-practice`](https://github.com/your-username/nextjs-project-practice), showcasing progression from learning to launching a real brand.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Status
 
-## Deploy on Vercel
+Currently in active development. Homepage layout and core architecture underway.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
