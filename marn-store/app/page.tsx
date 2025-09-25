@@ -2,6 +2,7 @@ import Image from "next/image";
 import TopBar from "./components/navigations/TopBar";
 import MainNav from "./components/navigations/MainNav";
 
+
 export default function Home() {
   return (
     <main>

@@ -15,7 +15,7 @@ const navItems = [
 export default function MainNav() {
   return (
     <nav
-      className="border-b border-gray-300 bg-white h-[60px]"
+      className="border-b border-gray-300 h-[60px]"
       aria-label="Main navigation"
     >
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full">
