@@ -1,18 +1,24 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 const navItems = [
-  { label: "New In", href: "#" },
-  { label: "Suits", href: "#" },
-  { label: "Coats", href: "#" },
-  { label: "Casual", href: "#" },
-  { label: "Trousers", href: "#" },
-  { label: "Shirts", href: "#" },
-  { label: "Shoes & Accessories", href: "#" },
+  { label: "New In", href: "/new" },
+  { label: "Suits", href: "/suits" },
+  { label: "Coats", href: "coats" },
+  { label: "Casuals", href: "casuals" },
+  { label: "Trousers", href: "trousers" },
+  { label: "Shirts", href: "shirts" },
+  { label: "Shoes & Accessories", href: "accessories" },
 ];
 
+const navLinkClass =
+  "relative pb-1 text-neutral-700 hover:underline hover:text-black transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 active:outline-none";
+
 export default function MainNav() {
+  const pathname = usePathname();
+
   return (
     <nav
       className="border-b border-gray-300 h-[60px]"
@@ -46,7 +52,7 @@ export default function MainNav() {
         </div>
         {/** Center: Category Links */}
         <ul
-          className="hidden mid:flex gap-6 text-sm h-full items-center"
+          className="hidden md:flex gap-6 text-sm h-full items-center  tracking-wide"
           role="menubar"
         >
           {navItems.map(({ label, href }) => (
@@ -58,7 +64,9 @@ export default function MainNav() {
               <Link
                 href={href}
                 role="menuitem"
-                className="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+                className={`${navLinkClass}
+`}
+                style={{outline:'none'}}
               >
                 {label}
               </Link>
@@ -70,10 +78,10 @@ export default function MainNav() {
           ))}
         </ul>
         {/** Right: Icons */}
-        <ul className="flex gap-4 items-center h-full" role="list">
+        <ul className="flex gap-4 items-center h-full " role="list">
           <li>
             <button
-              ariel-label="Search"
+              aria-label="Search"
               className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
             >
               🔍
