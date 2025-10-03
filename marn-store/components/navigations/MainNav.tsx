@@ -1,7 +1,10 @@
-"use client";
+
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import Image from "next/image";
+import SuitsDropdown from "../nav/SuitsDropdwon";
+import { parse } from "path";
+import { parseDropdownMarkdown } from "@/lib/parseDropdownMarkdown";
 
 const navItems = [
   { label: "New In", href: "/new" },
@@ -17,11 +20,11 @@ const navLinkClass =
   "relative pb-1 text-neutral-700 hover:underline hover:text-black transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 active:outline-none";
 
 export default function MainNav() {
-  const pathname = usePathname();
-
+  // const pathname = usePathname();
+  const sections = parseDropdownMarkdown("suits")
   return (
     <nav
-      className="border-b border-gray-300 h-[60px]"
+      className="relative z-50 border-b border-gray-300 h-[60px]"
       aria-label="Main navigation"
     >
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full">
@@ -51,6 +54,10 @@ export default function MainNav() {
           </Link>
         </div>
         {/** Center: Category Links */}
+        <ul className="flex space-x-6 text-sm font-medium w-full">
+          {" "}
+          <SuitsDropdown />
+        </ul>
         <ul
           className="hidden md:flex gap-6 text-sm h-full items-center  tracking-wide"
           role="menubar"
@@ -66,7 +73,7 @@ export default function MainNav() {
                 role="menuitem"
                 className={`${navLinkClass}
 `}
-                style={{outline:'none'}}
+                style={{ outline: "none" }}
               >
                 {label}
               </Link>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { HoverProvider } from "@/context/HoverContext";
 
 
 
@@ -29,9 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans">
-          {children}
-        </div>
+        <HoverProvider>
+          <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans">
+            {children}
+          </div>
+        </HoverProvider>
       </body>
     </html>
   );
