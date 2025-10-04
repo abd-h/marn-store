@@ -9,6 +9,7 @@
 - [Double breasted suits](/suits?type=double-breasted)
 - [Luxury Suits](/suits?type=luxury)
 - [Tweed suits](/suits?type=tweed)
+- [View all](/suits)
 
 ## Occasions
 

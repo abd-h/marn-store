@@ -1,7 +1,8 @@
 "use client";
 
 import { useHover } from "@/context/HoverContext";
-import {DropdownBanner} from "@/components/DropdownBanner";
+import { DropdownBanner } from "../DropdownBanner";
+
 
 export default function DropdownOverlay() {
   const { hoveredCategory } = useHover();

@@ -1,27 +1,18 @@
-
 import Link from "next/link";
-// import { usePathname } from "next/navigation";
-import Image from "next/image";
-import SuitsDropdown from "../nav/SuitsDropdwon";
-import { parse } from "path";
-import { parseDropdownMarkdown } from "@/lib/parseDropdownMarkdown";
 
-const navItems = [
-  { label: "New In", href: "/new" },
-  { label: "Suits", href: "/suits" },
-  { label: "Coats", href: "coats" },
-  { label: "Casuals", href: "casuals" },
-  { label: "Trousers", href: "trousers" },
-  { label: "Shirts", href: "shirts" },
-  { label: "Shoes & Accessories", href: "accessories" },
-];
+import SuitsDropdown from "../nav/SuitsDropdwon";
+
+import CoatDropdown from "../nav/CoatDropdown";
+import CasualsDropdown from "../nav/CasualsDropdown";
+import TrousersDropdown from "../nav/TrousersDropdown";
+import ShirtsDropdown from "../nav/ShirtsDropdown";
+import AccessoriesDropdown from "../nav/Accessories";
+import DropdownOverlay from "../nav/DropdownOverlay";
 
 const navLinkClass =
   "relative pb-1 text-neutral-700 hover:underline hover:text-black transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 active:outline-none";
 
 export default function MainNav() {
-  // const pathname = usePathname();
-  const sections = parseDropdownMarkdown("suits")
   return (
     <nav
       className="relative z-50 border-b border-gray-300 h-[60px]"
@@ -54,36 +45,19 @@ export default function MainNav() {
           </Link>
         </div>
         {/** Center: Category Links */}
-        <ul className="flex space-x-6 text-sm font-medium w-full">
+        <ul
+          className="flex space-x-6 text-sm font-medium w-full justify-center items-center h-full"
+          role="list"
+        >
           {" "}
           <SuitsDropdown />
+          <CoatDropdown />
+          <CasualsDropdown />
+          <TrousersDropdown />
+          <ShirtsDropdown />
+          <AccessoriesDropdown />
         </ul>
-        <ul
-          className="hidden md:flex gap-6 text-sm h-full items-center  tracking-wide"
-          role="menubar"
-        >
-          {navItems.map(({ label, href }) => (
-            <li
-              key={label}
-              role="none"
-              className="relative h-full flex items-center group"
-            >
-              <Link
-                href={href}
-                role="menuitem"
-                className={`${navLinkClass}
-`}
-                style={{ outline: "none" }}
-              >
-                {label}
-              </Link>
-              {/** Placeholder for drop down banner */}
-              <div className="absolute left-0 top-full w-screen bg-white shadow-lg hidden group-hover:block">
-                {/** Future: dynamic sub-links go here */}
-              </div>
-            </li>
-          ))}
-        </ul>
+
         {/** Right: Icons */}
         <ul className="flex gap-4 items-center h-full " role="list">
           <li>
@@ -120,6 +94,8 @@ export default function MainNav() {
           </li>
         </ul>
       </div>
+      {/** Shared dropdown container */}
+      <DropdownOverlay />
     </nav>
   );
 }

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { parseDropdownMarkdown } from "@/lib/parseDropdownMarkdown";
 
-export async function Get(request: Request) {
+export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
     if (!category) return NextResponse.json([]);
