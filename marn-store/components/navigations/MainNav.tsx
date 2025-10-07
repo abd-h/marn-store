@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 
 import SuitsDropdown from "../nav/SuitsDropdwon";
@@ -8,14 +9,14 @@ import TrousersDropdown from "../nav/TrousersDropdown";
 import ShirtsDropdown from "../nav/ShirtsDropdown";
 import AccessoriesDropdown from "../nav/Accessories";
 import DropdownOverlay from "../nav/DropdownOverlay";
-
-const navLinkClass =
-  "relative pb-1 text-neutral-700 hover:underline hover:text-black transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 active:outline-none";
+import { useHover } from "@/context/HoverContext";
 
 export default function MainNav() {
+  const { hoveredCategory, setHoveredCategory } = useHover();
   return (
     <nav
       className="relative z-50 border-b border-gray-300 h-[60px]"
+      onMouseLeave={() => setHoveredCategory(null)}
       aria-label="Main navigation"
     >
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full">
@@ -95,7 +96,7 @@ export default function MainNav() {
         </ul>
       </div>
       {/** Shared dropdown container */}
-      <DropdownOverlay />
+      {hoveredCategory && <DropdownOverlay />}
     </nav>
   );
 }

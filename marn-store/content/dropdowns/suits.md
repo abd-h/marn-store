@@ -15,7 +15,7 @@
 
 - [Black tie](/suits?occasions=black-tie)
 - [Wedding party](/suits?occasions=weddings)
-- [Wedding guest](/suits?occasioins=weddings)
+- [Wedding guest](/suits?occasions=weddings)
 - [Race day suits](/suits?occasions=ascot)
 - [Graduation](/suits?occasions=graduation)
 

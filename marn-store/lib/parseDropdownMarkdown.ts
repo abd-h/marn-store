@@ -1,35 +1,28 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
-import { DropdownSection } from "./types"
 
-export function parseDropdownMarkdown(category: string): DropdownSection[] {
-  try {
-    const filePath = path.join(process.cwd(), "content/dropdowns", `${category}.md`);
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    console.log("Raw Markdown:", fileContent);
-    const { content } = matter(fileContent);
+export function parseDropdownMarkdown(category: string) {
+  const filePath = path.join(process.cwd(), "content/dropdowns", `${category}.md`);
+  const raw = fs.readFileSync(filePath, "utf-8");
 
-    const sections = content
-      .split(/^##\s+/gm)
-      .slice(1)
-      .map((section) => {
-        const [headingLine, ...rest] = section.trim().split("\n");
-        const links = rest
-          .filter((line: string) => line.startsWith("- ["))
-          .map((line: string) => {
-            const match = line.match(/\-\[(.*?)\]\((.*?)\)/);
-            return match ? { label: match[1], href: match[2] } : null;
-          })
-          .filter((link): link is { label: string; href: string } => link !== null);
-        return { heading: headingLine.trim(), links };
-      });
+  const lines = raw.split("\n");
+  const sections: { heading: string; links: { label: string; href: string }[] }[] = [];
 
-    return sections;
-  } catch (error) {
-    console.error("Markdown parse error:", error);
-    return [];
+  let currentSection: { heading: string; links: { label: string; href: string }[] } | null = null;
+
+  for (const line of lines) {
+    const headingMatch = line.match(/^##\s+(.*)/);
+    const linkMatch = line.match(/^-\s*\[(.+?)\]\((.+?)\)/);
+
+    if (headingMatch) {
+      if (currentSection) sections.push(currentSection);
+      currentSection = { heading: headingMatch[1], links: [] };
+    } else if (linkMatch && currentSection) {
+      currentSection.links.push({ label: linkMatch[1], href: linkMatch[2] });
+    }
   }
+
+  if (currentSection) sections.push(currentSection);
+console.log("✅ Parsed sections:", JSON.stringify(sections, null, 2));
+  return sections;
 }
-
-
