@@ -1,5 +1,6 @@
 "use client";
 import { useHover } from "@/context/HoverContext";
+import { NavItemClass } from "@/lib/styles";
 import Link from "next/link";
 
 export default function CasualsDropdown() {
@@ -10,7 +11,7 @@ export default function CasualsDropdown() {
       onMouseEnter={() => setHoveredCategory("casuals")}
       className="relative group"
     >
-      <Link href="/casuals" className="hover:text-red-900 transition">
+      <Link href="/casuals" className={NavItemClass}>
         Casuals
       </Link>
     </li>

@@ -10,7 +10,7 @@ export default function CoatDropdown() {
       onMouseEnter={() => setHoveredCategory("coats")}
       className="relative group"
     >
-      <Link href="/coats" className="hover:text-red-900 transition">
+      <Link href="/coats" className="hover:text-red-900 transition font-bold tracking-wide">
         Coats
       </Link>
     </li>

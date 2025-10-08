@@ -10,6 +10,11 @@ import ShirtsDropdown from "../nav/ShirtsDropdown";
 import AccessoriesDropdown from "../nav/Accessories";
 import DropdownOverlay from "../nav/DropdownOverlay";
 import { useHover } from "@/context/HoverContext";
+import NewIn from "../nav/new-in";
+import WishlistIcon from "../icons/nav/WishlistIcon";
+import SearchIcon from "../icons/nav/SearchIcon";
+import ProfileIcon from "../icons/nav/ProfileIcon";
+import BasketIcon from "../icons/nav/basketIcon";
 
 export default function MainNav() {
   const { hoveredCategory, setHoveredCategory } = useHover();
@@ -19,9 +24,9 @@ export default function MainNav() {
       onMouseLeave={() => setHoveredCategory(null)}
       aria-label="Main navigation"
     >
-      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full">
+      <div className=" max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full">
         {/* Left: Logo*/}
-        <div className="flex items-center h-full">
+        <div className="absolute left-20 justify-start flex items-center h-full">
           <Link href="/" aria-label="Marn homepage">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -47,10 +52,11 @@ export default function MainNav() {
         </div>
         {/** Center: Category Links */}
         <ul
-          className="flex space-x-6 text-sm font-medium w-full justify-center items-center h-full"
+          className="px-2 mx-8 flex space-x-14 text-sm font-medium justify-center items-center h-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           role="list"
         >
           {" "}
+          <NewIn />
           <SuitsDropdown />
           <CoatDropdown />
           <CasualsDropdown />
@@ -60,38 +66,21 @@ export default function MainNav() {
         </ul>
 
         {/** Right: Icons */}
-        <ul className="flex gap-4 items-center h-full " role="list">
+        <ul
+          className=" absolute right-8 space-x-8 px-2 flex gap-4 justify-between items-center h-full "
+          role="list"
+        >
           <li>
-            <button
-              aria-label="Search"
-              className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-            >
-              🔍
-            </button>
+            <SearchIcon />
           </li>
           <li>
-            <button
-              aria-label="Wishlist"
-              className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-            >
-              🤍
-            </button>
+            <WishlistIcon />
           </li>
           <li>
-            <button
-              aria-label="Profile"
-              className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-            >
-              👤
-            </button>
+            <ProfileIcon />
           </li>
           <li>
-            <button
-              aria-label="Basket"
-              className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-            >
-              🛒
-            </button>
+            <BasketIcon />
           </li>
         </ul>
       </div>
