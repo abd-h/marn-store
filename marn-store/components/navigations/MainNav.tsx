@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import SuitsDropdown from "../nav/SuitsDropdwon";
+import SuitsDropdown from "../nav/SuitsDropdown";
 
 import CoatDropdown from "../nav/CoatDropdown";
 import CasualsDropdown from "../nav/CasualsDropdown";
@@ -11,13 +12,13 @@ import AccessoriesDropdown from "../nav/Accessories";
 import DropdownOverlay from "../nav/DropdownOverlay";
 import { useHover } from "@/context/HoverContext";
 import NewIn from "../nav/new-in";
-import WishlistIcon from "../icons/nav/WishlistIcon";
-import SearchIcon from "../icons/nav/SearchIcon";
-import ProfileIcon from "../icons/nav/ProfileIcon";
-import BasketIcon from "../icons/nav/basketIcon";
+
+import { navIcons } from "../icons/nav/navIcons";
+import React from "react";
 
 export default function MainNav() {
   const { hoveredCategory, setHoveredCategory } = useHover();
+  const pathname = usePathname();
   return (
     <nav
       className="relative z-50 border-b border-gray-300 h-[60px]"
@@ -67,21 +68,28 @@ export default function MainNav() {
 
         {/** Right: Icons */}
         <ul
-          className=" absolute right-8 space-x-8 px-2 flex gap-4 justify-between items-center h-full "
+          className="absolute right-8 px-2 flex gap-6 items-center h-full"
           role="list"
         >
-          <li>
-            <SearchIcon />
-          </li>
-          <li>
-            <WishlistIcon />
-          </li>
-          <li>
-            <ProfileIcon />
-          </li>
-          <li>
-            <BasketIcon />
-          </li>
+          {navIcons.map(({ icon, href, title }) => {
+            const isActive = pathname === href;
+            return (
+              <li key={title}>
+                <Link aria-label={title} href={href}>
+                  {React.isValidElement(icon) &&
+                    React.cloneElement(
+                      icon as React.ReactElement<{ className?: string }>,
+                      {
+                        className: `${
+                          (icon.props as { className?: string })?.className ||
+                          ""
+                        } ${isActive ? "text-foreground" : "text-muted"}`,
+                      }
+                    )}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
       {/** Shared dropdown container */}

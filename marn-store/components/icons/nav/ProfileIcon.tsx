@@ -1,7 +1,10 @@
 import { UserRound } from "lucide-react";
+import IconWrapper from "./IconWrapper";
 
-export default function ProfileIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <UserRound />
-  );
+export default function ProfileIcon() {
+    return (
+        <IconWrapper ariaLabel="Profile">
+            <UserRound />
+        </IconWrapper>
+    )
 }

@@ -1,7 +1,11 @@
 import { Heart } from "lucide-react";
+import IconWrapper from "./IconWrapper";
+import { IconProp } from "./types";
 
-export default function WishlistIcon(props: React.SVGProps<SVGSVGElement>) {
+export default function WishlistIcon({ className }:  IconProp) {
   return (
-   <Heart width={24} height={24}  />
+    <IconWrapper ariaLabel="Wishlist">
+      <Heart  />
+    </IconWrapper>
   );
 }
