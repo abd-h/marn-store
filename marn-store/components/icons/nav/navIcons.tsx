@@ -13,7 +13,7 @@ type NavIconItem = {
 };
 
 export const navIcons: NavIconItem[] = [
-  { title: "Search", href: "/search", icon: <SearchIcon /> },
+  { title: "Search", href: "#", icon: <SearchIcon /> },
   { title: "Wishlist", href: "/wishlist", icon: <WishlistIcon /> },
   { title: "Profile", href: "/account", icon: <ProfileIcon /> },
   { title: "Basket", href: "/basket", icon: <BasketIcon /> },
