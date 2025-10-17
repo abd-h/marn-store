@@ -28,9 +28,9 @@ export function DropdownBanner({ category }: { category: string }) {
   }
 
   return (
-    <section className="w-screen px-8 py-6 grid grid-cols-4 gap-6 max-w-screen-xl mx-auto">
+    <section className="w-screen px-4 pt-0 pb-6 grid grid-cols-4 gap-6 max-w-screen-xl mx-auto">
       {sections.map(({ heading, links }) => (
-        <div  key={heading}>
+        <div key={heading}>
           <h3 className=" p-2 text-sm font-bold mb-2">{heading}</h3>
           <ul className=" text-sm text-black tracking-wide">
             {" "}

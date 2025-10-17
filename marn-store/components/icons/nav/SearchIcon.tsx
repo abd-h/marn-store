@@ -1,4 +1,4 @@
-import { useSearchBanner } from "@/context/SearchBannerContext";
+
 import IconWrapper from "./IconWrapper";
 import { IconProp } from "./types";
 import { useHover } from "@/context/HoverContext";
@@ -6,7 +6,6 @@ import { useHover } from "@/context/HoverContext";
 
 
 export default function SearchIcon({ className }: IconProp) {
-  const { open } = useSearchBanner();
   const { setSearchActive } = useHover();
 
   return (
@@ -20,7 +19,7 @@ export default function SearchIcon({ className }: IconProp) {
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={className}
+          className={className + ' outline'}
         >
           <path d="m21 21-4.34-4.34" />
           <circle cx="11" cy="11" r="8" />

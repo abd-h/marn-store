@@ -1,35 +1,62 @@
-// components/search/SearchBanner.tsx
 "use client";
-import { useSearchBanner } from "@/context/SearchBannerContext";
+
+import { useRef, useEffect } from "react";
+import { useHover } from "@/context/HoverContext";
 import SearchIcon from "../SearchIcon";
 
 export default function SearchBanner() {
-  const { isOpen, close } = useSearchBanner();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { setSearchActive } = useHover();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+   }, []);
+
+  const handleSearch = () => {
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
 
   return (
     <div
-      className={` w-full max-w-screen-xl mx-auto z-40 bg-white dark:bg-black transition-transform duration-300 ${
-        isOpen ? "translate-y-0" : "-translate-y-full"
-      } h-[60px] flex items-center px-6 shadow-md`}
+      className={`flex justify-between w-full mx-auto z-40 bg-white dark:bg-black transition-transform duration-300 px-4 pt-0 pb-6 ease-out`}
     >
-      <div className="flex items-center gap-4 w-full max-w-screen-xl mx-auto">
+      <div className="relative flex items-center border border-black rounded w-[90%]  px-2 ">
         <SearchIcon className="w-5 h-5 text-muted" />
         <input
+          ref={inputRef}
           type="text"
           placeholder="Search"
-          className="flex-grow bg-transparent border-b border-gray-300 dark:border-gray-600   outline-none text-sm px-2 py-1"
+          className="flex-grow px-4 py-4 text-sm bg-transparent outline-none placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-lg"
         />
-        <button className="text-sm font-medium px-4 py-1 border rounded border-gray-400 dark:border-gray-600">
+        <button
+          onClick={handleSearch}
+          className="absolute right-0 bg-black text-white  h-full px-12 py-2 text-lg tracking-wider font-medium"
+        >
           Search
         </button>
-        <button
-          onClick={close}
-          aria-label="Close search"
-          className="text-xl font-bold px-2"
-        >
-          ×
-        </button>
       </div>
+      <button
+        onClick={() => setSearchActive(false)}
+        aria-label="Close search"
+        className="absolute right-8 text-6xl text-center font-thin px-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-8 h-8 text-black dark:text-white"
+          aria-hidden="true"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
     </div>
   );
 }

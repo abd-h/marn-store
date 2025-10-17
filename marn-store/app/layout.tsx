@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { HoverProvider } from "@/context/HoverContext";
-import { SearchBannerProvider } from "@/context/SearchBannerContext";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,13 +29,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SearchBannerProvider>
+        
           <HoverProvider>
           <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans">
             {children}
           </div>
         </HoverProvider>
-        </SearchBannerProvider>
+    
       </body>
     </html>
   );
