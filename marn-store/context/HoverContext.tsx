@@ -6,6 +6,9 @@ type HoverContextType = {
     setHoveredCategory: (category: string | null) => void;
     searchActive: boolean;
     setSearchActive: (active: boolean) => void;
+    searchWasManuallyActivated: boolean;
+    activateSearch: () => void;
+    deactivateSearch: () => void;
 }
 
 const HoverContext = createContext<HoverContextType | undefined>(undefined);
@@ -14,11 +17,27 @@ export function HoverProvider({ children }: { children: ReactNode }) {
     const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
     const [searchActive, setSearchActive] = useState<boolean>(false);
 
+    const [searchWasManuallyActivated, setSearchWasManuallyActivated] = useState<boolean>(false);
+
+    const activateSearch = () => {
+        setSearchActive(true);
+        setSearchWasManuallyActivated(true);
+    }
+
+    const deactivateSearch = () => {
+        setSearchActive(false);
+        setSearchWasManuallyActivated(false);
+     };
+
     const contextValue = {
         hoveredCategory, 
         setHoveredCategory,
         searchActive,
         setSearchActive,
+        searchWasManuallyActivated,
+        setSearchWasManuallyActivated,
+        deactivateSearch,
+        activateSearch,
     }
     
     return (

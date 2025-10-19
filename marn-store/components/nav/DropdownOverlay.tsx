@@ -1,34 +1,47 @@
 "use client";
 
 import { useHover } from "@/context/HoverContext";
+import { useState, useEffect } from "react";
 import { DropdownBanner } from "../DropdownBanner";
 import SearchBanner from "../icons/nav/search/SearchBanner";
 
 export default function DropdownOverlay() {
-  const { hoveredCategory, searchActive } = useHover();
+  const { hoveredCategory, searchWasManuallyActivated, searchActive } =
+    useHover();
   console.log("Hovered category:", hoveredCategory);
-  console.log("SEARCH ACTIVE:", searchActive);
 
-  const shouldShowOverlay = hoveredCategory || searchActive;
+  const [isVisible, setIsVisible] = useState(false);
+
+  const shouldShowOverlay = hoveredCategory || searchWasManuallyActivated;
+
+  useEffect(() => {
+    if (shouldShowOverlay) {
+      setIsVisible(true);
+    } else {
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldShowOverlay]);
+
   return (
     <div
-      className={` absolute left-0 top-full w-full z-40 bg-white dark:bg-black shadow-lg overflow-hidden transition-all duration-300 ease-in-out rounded-b ${
+      className={`absolute top-[90px] left-0 w-full z-40 bg-white dark:bg-black shadow-lg origin-top transition-transform duration-300 ease-in-out will-change-transform ${
         shouldShowOverlay
-          ? " opacity-100 ranslate-y-px  pointer-events-auto"
-          : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
+          ? "opacity-100 scale-y-100 pointer-events-auto"
+          : "opacity-0 scale-y-0 pointer-events-none"
       }`}
-      aria-hidden={!(hoveredCategory || searchActive)}
+      aria-hidden={!shouldShowOverlay}
     >
       <div
         className={`w-2/4 mx-auto ${
           !shouldShowOverlay ? "p-0 m-0" : "px-4 py-6"
         }`}
       >
-        {searchActive ? (
-          <SearchBanner />
-        ) : hoveredCategory ? (
+        {isVisible && hoveredCategory ? (
           <DropdownBanner category={hoveredCategory} />
-        ) : null}
+        ) : (
+          <SearchBanner />
+        )}
       </div>
     </div>
   );

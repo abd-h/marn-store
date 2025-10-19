@@ -6,10 +6,16 @@ import SearchIcon from "../SearchIcon";
 
 export default function SearchBanner() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { setSearchActive } = useHover();
+  
+  const { deactivateSearch} = useHover();
+
+  
 
   useEffect(() => {
-    inputRef.current?.focus();
+    const timer = setTimeout(() => { 
+      inputRef.current?.focus();
+    }, 50);
+    return () => clearTimeout(timer);
    }, []);
 
   const handleSearch = () => {
@@ -17,6 +23,10 @@ export default function SearchBanner() {
       inputRef.current.value = "";
     }
   };
+
+  useEffect(() => {
+    console.log("SearchBanner is Mounted");
+  }, [])
 
   return (
     <div
@@ -32,13 +42,13 @@ export default function SearchBanner() {
         />
         <button
           onClick={handleSearch}
-          className="absolute right-0 bg-black text-white  h-full px-12 py-2 text-lg tracking-wider font-medium"
+          className="absolute right-0 bg-black text-white  h-full px-12 py-2 text-lg tracking-wider font-medium uppercase"
         >
           Search
         </button>
       </div>
       <button
-        onClick={() => setSearchActive(false)}
+        onClick={deactivateSearch}
         aria-label="Close search"
         className="absolute right-8 text-6xl text-center font-thin px-2"
       >

@@ -21,12 +21,14 @@ import TopBar from "./TopBar";
 export default function MainNav() {
   const { hoveredCategory, setHoveredCategory, searchActive, setSearchActive } = useHover();
   const pathname = usePathname();
+
   const shouldShowOverlay = hoveredCategory || searchActive;
+
   return (
     <header className="w-full z-100 flex flex-col">
       <TopBar />
       <nav
-        className="relative z-50 border-b border-gray-300 h-[80px]"
+        className="relative z-50  h-[80px]"
         onMouseLeave={() => setHoveredCategory(null)}
         aria-label="Main navigation"
       >
@@ -75,7 +77,7 @@ export default function MainNav() {
 
           {/** Right: Icons */}
           <ul
-            className="absolute right-8 px-2 flex gap-6 items-center h-full"
+            className=" absolute right-8 px-2 flex gap-6 items-center h-full"
             role="list"
           >
             {navIcons.map(({ icon, href, title }) => {
@@ -100,16 +102,9 @@ export default function MainNav() {
           </ul>
         </div>
         {/** Shared dropdown container */}
-        {shouldShowOverlay && <DropdownOverlay />}
+        <DropdownOverlay />
       </nav>
-      {shouldShowOverlay && (
-        <div className="relative z-40">
-          <DropdownOverlay />
-          {searchActive && (
-            <div className="absolute top-full left-0 right-0 bottom-0 bg-black bg-opacity-30 z-30 transition-opacity duration-300" />
-          )}
-        </div>
-      )}
+     
     </header>
   );
 }
