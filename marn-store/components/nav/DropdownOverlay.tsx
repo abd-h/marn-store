@@ -11,38 +11,66 @@ export default function DropdownOverlay() {
   console.log("Hovered category:", hoveredCategory);
 
   const [isVisible, setIsVisible] = useState(false);
+  const [lastContent, setLastContent] = useState<"search" | "dropdown" | null>(null);
 
   const shouldShowOverlay = hoveredCategory || searchWasManuallyActivated;
 
-  useEffect(() => {
-    if (shouldShowOverlay) {
-      setIsVisible(true);
-    } else {
-      const timer = setTimeout(() => setIsVisible(false), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [shouldShowOverlay]);
+ 
 
+useEffect(() => {
+  if (shouldShowOverlay) {
+    setIsVisible(true);
+
+    if (hoveredCategory) {
+      setLastContent("dropdown");
+    } else if (searchWasManuallyActivated) {
+      setLastContent("search");
+    }
+  } else {
+    const timer = setTimeout(() => setIsVisible(false), 300);
+    return () => clearTimeout(timer);
+  }
+}, [shouldShowOverlay]);
+
+  useEffect(() => {
+    if (searchWasManuallyActivated) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [searchWasManuallyActivated]);
+
+  
   return (
-    <div
-      className={`absolute top-[90px] left-0 w-full z-40 bg-white dark:bg-black shadow-lg origin-top transition-transform duration-300 ease-in-out will-change-transform ${
-        shouldShowOverlay
-          ? "opacity-100 scale-y-100 pointer-events-auto"
-          : "opacity-0 scale-y-0 pointer-events-none"
-      }`}
-      aria-hidden={!shouldShowOverlay}
-    >
+    <>
+      {searchWasManuallyActivated && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 z-30 transition-opacity duration-500 ease-in-out" />
+      )}
+
       <div
-        className={`w-2/4 mx-auto ${
-          !shouldShowOverlay ? "p-0 m-0" : "px-4 py-6"
+        className={`absolute top-[90px] left-0 w-full z-40 bg-white dark:bg-black shadow-lg origin-top overflow-hidden transition-all duration-500 ease-in-out ${
+          isVisible
+            ? "max-h-[600px] opacity-100 pointer-events-auto"
+            : "max-h-0 opacity-0 pointer-events-none"
         }`}
+        aria-hidden={!isVisible}
       >
-        {isVisible && hoveredCategory ? (
-          <DropdownBanner category={hoveredCategory} />
-        ) : (
-          <SearchBanner />
-        )}
+        <div
+          className={` mb-12 w-2/4 mx-auto px-4 py-6 transition-all duration-500 ease-in-out`}
+        >
+          {lastContent === "dropdown" && (
+            <div className={`${isVisible ? "block" : "hidden"}`}>
+              <DropdownBanner category={hoveredCategory ?? ""} />
+            </div>
+          )}
+
+          {lastContent === "search" && (
+            <div className={` ${isVisible ? "block" : "hidden"}`}>
+              <SearchBanner />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

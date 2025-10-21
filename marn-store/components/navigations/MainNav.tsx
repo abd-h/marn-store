@@ -25,7 +25,7 @@ export default function MainNav() {
   const shouldShowOverlay = hoveredCategory || searchActive;
 
   return (
-    <header className="w-full z-100 flex flex-col">
+    <header className="fixed top-0 left-0 w-full z-100 flex flex-col">
       <TopBar />
       <nav
         className="relative z-50  h-[80px]"
