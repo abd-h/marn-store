@@ -29,13 +29,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        
-          <HoverProvider>
-          <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans">
+        <HoverProvider>
+          <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans contents">
             {children}
-          </div>
+          </main>
         </HoverProvider>
-    
       </body>
     </html>
   );

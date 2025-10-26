@@ -25,86 +25,86 @@ export default function MainNav() {
   const shouldShowOverlay = hoveredCategory || searchActive;
 
   return (
-    <header className="fixed top-0 left-0 w-full z-100 flex flex-col">
-      <TopBar />
-      <nav
-        className="relative z-50  h-[80px]"
-        onMouseLeave={() => setHoveredCategory(null)}
-        aria-label="Main navigation"
-      >
-        <div className=" max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full">
-          {/* Left: Logo*/}
-          <div className="absolute left-20 justify-start flex items-center h-full">
-            <Link href="/" aria-label="Marn homepage">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="160"
-                height="40"
-                viewBox="0 0 160 40"
-                role="img"
-                aria-label="Marn logo"
-                className="fill-black dark:fill-white"
-              >
-                <text
-                  x="0"
-                  y="28"
-                  fontFamily="Georgia, Times, serif"
-                  fontSize="28"
-                  fontWeight="600"
-                  letterSpacing="4"
+    <>
+      {" "}
+      <header className="fixed top-0 left-0 w-full z-[10000] bg-white flex flex-col">
+        <TopBar />
+        <nav
+          className="relative h-[80px]"
+          onMouseLeave={() => setHoveredCategory(null)}
+          aria-label="Main navigation"
+        >
+          <div className=" max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full">
+            {/* Left: Logo*/}
+            <div className="absolute left-20 justify-start flex items-center h-full">
+              <Link href="/" aria-label="Marn homepage">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="160"
+                  height="40"
+                  viewBox="0 0 160 40"
+                  role="img"
+                  aria-label="Marn logo"
+                  className="fill-black dark:fill-white"
                 >
-                  MARN
-                </text>
-              </svg>
-            </Link>
-          </div>
-          {/** Center: Category Links */}
-          <ul
-            className=" px-2 mx-8 flex space-x-14 text-sm font-medium justify-around items-center h-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            role="list"
-            onMouseEnter={() => setSearchActive(false)}
-            
-          >
-            {" "}
-            <NewIn />
-            <SuitsDropdown />
-            <CoatDropdown />
-            <CasualsDropdown />
-            <TrousersDropdown />
-            <ShirtsDropdown />
-            <AccessoriesDropdown />
-          </ul>
+                  <text
+                    x="0"
+                    y="28"
+                    fontFamily="Georgia, Times, serif"
+                    fontSize="28"
+                    fontWeight="600"
+                    letterSpacing="4"
+                  >
+                    MARN
+                  </text>
+                </svg>
+              </Link>
+            </div>
+            {/** Center: Category Links */}
+            <ul
+              className=" px-2 mx-8 flex space-x-14 text-sm font-medium justify-around items-center h-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              role="list"
+              onMouseEnter={() => setSearchActive(false)}
+            >
+              {" "}
+              <NewIn />
+              <SuitsDropdown />
+              <CoatDropdown />
+              <CasualsDropdown />
+              <TrousersDropdown />
+              <ShirtsDropdown />
+              <AccessoriesDropdown />
+            </ul>
 
-          {/** Right: Icons */}
-          <ul
-            className=" absolute right-8 px-2 flex gap-6 items-center h-full"
-            role="list"
-          >
-            {navIcons.map(({ icon, href, title }) => {
-              const isActive = pathname === href;
-              return (
-                <li key={title}>
-                  <Link aria-label={title} href={href}>
-                    {React.isValidElement(icon) &&
-                      React.cloneElement(
-                        icon as React.ReactElement<{ className?: string }>,
-                        {
-                          className: `${
-                            (icon.props as { className?: string })?.className ||
-                            ""
-                          } ${isActive ? "text-foreground" : "text-muted"}`,
-                        }
-                      )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        {/** Shared dropdown container */}
-        <DropdownOverlay />
-      </nav>
-     
-    </header>
+            {/** Right: Icons */}
+            <ul
+              className=" absolute right-8 px-2 flex gap-6 items-center h-full"
+              role="list"
+            >
+              {navIcons.map(({ icon, href, title }) => {
+                const isActive = pathname === href;
+                return (
+                  <li key={title}>
+                    <Link aria-label={title} href={href}>
+                      {React.isValidElement(icon) &&
+                        React.cloneElement(
+                          icon as React.ReactElement<{ className?: string }>,
+                          {
+                            className: `${
+                              (icon.props as { className?: string })
+                                ?.className || ""
+                            } ${isActive ? "text-foreground" : "text-muted"}`,
+                          }
+                        )}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          {/** Shared dropdown container */}
+        </nav>
+      </header>
+    </>
   );
 }

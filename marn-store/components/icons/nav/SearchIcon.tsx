@@ -9,7 +9,7 @@ export default function SearchIcon({ className }: IconProp) {
   const { activateSearch} = useHover();
 
   return (
-    <button onClick={activateSearch} aria-label="Open search">
+    <button onClick={activateSearch} aria-label="Open search" >
       <IconWrapper ariaLabel="Search">
         <svg
           xmlns="http://www.w3.org/2000/svg"
