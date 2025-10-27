@@ -78,7 +78,7 @@ export default function MainNav() {
 
             {/** Right: Icons */}
             <ul
-              className=" absolute right-8 px-2 flex gap-6 items-center h-full"
+              className="absolute right-8 px-2 flex gap-6 items-center justify-center h-full"
               role="list"
             >
               {navIcons.map(({ icon, href, title }) => {
