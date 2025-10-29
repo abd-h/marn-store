@@ -1,11 +1,13 @@
 import React from "react";
+import type { SVGProps } from "react";
 import { cn } from "@/lib/utils";
 
 type IconWrapperProps = {
-    children: React.ReactElement<any>,
-    className?: string,
-    ariaLabel?: string,
-    size?: "sm" | "md" | "lg",
+  children: React.ReactElement<SVGProps<SVGSVGElement>>;
+
+  className?: string;
+  ariaLabel?: string;
+  size?: "sm" | "md" | "lg";
 };
 
 const sizeMap = {
