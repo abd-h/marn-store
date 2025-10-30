@@ -4,15 +4,15 @@ import PromoTicker from "./PromoTicker";
 
 export default function TopBar() {
   return (
-    <header className="bg-newtral-100 text-[12px] text-black font-[600] border-b border-gray-300">
+    <header className="w-screen bg-newtral-100 text-[12px] text-black font-[600] border-b border-gray-300">
       <nav
         aria-label="Top navigation"
-        className="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center h-[40px] px-4 gap-2 md:gap-0 tracking-[0.15em]"
+        className="max-w-screen-2xl mx-auto flex justify-between mobile:justify-center items-center h-[40px] px-4 gap-2 tracking-[0.15em]"
       >
         {/* Left section*/}
 
-        <ul className="flex flex-wrap justify-center md:justify-start h-full items-stretch divide-x divide-gray-300 role=list">
-          <li className="px-8 flex items-center h-full">
+        <ul className="mobile:hidden tablet:hidden  flex flex-wrap justify-center h-full items-stretch role=list">
+          <li className="px-8 flex items-center h-full border-r-2 border-gray-300">
             <a
               href="#"
               className="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus-ring-black"
@@ -20,7 +20,7 @@ export default function TopBar() {
               Marn Hire
             </a>
           </li>
-          <li className="px-8 flex items-center h-full">
+          <li className="px-8 flex items-center h-full border-r-2 border-gray-300">
             <a
               href="#"
               className="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus-ring-black"
@@ -28,7 +28,7 @@ export default function TopBar() {
               Gift Cards
             </a>
           </li>
-          <li className="px-8 flex items-center border-r-2 border-gray-300">
+          <li className="px-8 border-r-2 border-gray-300 flex items-center">
             <a
               href="#"
               className="hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus-ring-black "
@@ -39,11 +39,11 @@ export default function TopBar() {
         </ul>
 
         {/* Central section*/}
-        <div className="w-full md:w-1/3 text-center" aria-live="polite">
+        <div className=" mobile:w-full text-center" aria-live="polite">
           <PromoTicker />
         </div>
         {/* Right section*/}
-        <ul className="flex flex-wrap justify-center md:justify-end h-full items-stretch  divide-x divide-gray-300 role=list ">
+        <ul className="mobile:hidden tablet:hidden flex flex-wrap justify-center md:justify-end h-full items-stretch  divide-x divide-gray-300 role=list ">
           <li className="px-8 flex items-center  border-l-2 border-gray-300">
             <a
               href="#"

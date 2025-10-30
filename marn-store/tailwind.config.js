@@ -15,6 +15,11 @@ module.exports = {
       animation: {
         "slide-down": "slide-down 0.2s ease-out forwards",
       },
+      screens: {
+        mobile: { raw: "(min-width: 350px) and (max-width: 450px)" },
+        tablet: { raw: "(min-width: 451px) and (max-width: 1024px)" },
+        desktop: "1025px",
+      },
     },
   },
   plugins: [],

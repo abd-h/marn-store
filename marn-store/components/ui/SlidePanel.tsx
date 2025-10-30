@@ -1,0 +1,1 @@
+// Generic sliding panel (directional)
