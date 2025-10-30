@@ -1,11 +1,6 @@
-import Image from "next/image";
-import TopBar from "../components/navigations/TopBar";
 import MainNav from "../components/navigations/MainNav";
-import SearchBanner from "@/components/icons/nav/search/SearchBanner";
+
 import OverlayLayer from "@/components/icons/nav/search/OverlayLayer";
-
-
-
 
 export default function Home() {
   return (
