@@ -1,104 +1,14 @@
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-
-import SuitsDropdown from "../nav/SuitsDropdown";
-
-import CoatDropdown from "../nav/CoatDropdown";
-import CasualsDropdown from "../nav/CasualsDropdown";
-import TrousersDropdown from "../nav/TrousersDropdown";
-import ShirtsDropdown from "../nav/ShirtsDropdown";
-import AccessoriesDropdown from "../nav/Accessories";
-
-import { useHover } from "@/context/HoverContext";
-import NewIn from "../nav/new-in";
-
-import { navIcons } from "../icons/nav/navIcons";
 import React from "react";
-import TopBar from "../topbar/TopBar";
+import DesktopNav from "./DesktopNav";
 
 export default function MainNav() {
-  const { hoveredCategory, setHoveredCategory, searchActive, setSearchActive } = useHover();
-  const pathname = usePathname();
-
-  const shouldShowOverlay = hoveredCategory || searchActive;
-
   return (
-    <header className="fixed top-0 left-0 w-full z-[10000] bg-white flex flex-col overflow-x-hidden">
-      <TopBar />
-      <nav
-        className="relative h-[80px] overflow-x-hidden"
-        onMouseLeave={() => setHoveredCategory(null)}
-        aria-label="Main navigation"
-      >
-        <div className=" max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full w-full">
-          {/* Left: Logo */}
-          <div className="flex items-center h-full">
-            <Link href="/" aria-label="Marn homepage">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 160 40"
-                role="img"
-                aria-label="Marn logo"
-                className="fill-black dark:fill-white w-[160px] h-[40px] mobile:w-[120px] mobile:h-[30px] max-w-full"
-              >
-                <text
-                  x="0"
-                  y="28"
-                  fontFamily="Georgia, Times, serif"
-                  fontSize="28"
-                  fontWeight="600"
-                  letterSpacing="4"
-                >
-                  MARN
-                </text>
-              </svg>
-            </Link>
-          </div>
-
-          {/* Center: Category Links (hidden on mobile) */}
-          <ul
-            className="mobile:hidden flex space-x-14 text-sm font-medium justify-center items-center h-full"
-            role="list"
-            onMouseEnter={() => setSearchActive(false)}
-          >
-            <NewIn />
-            <SuitsDropdown />
-            <CoatDropdown />
-            <CasualsDropdown />
-            <TrousersDropdown />
-            <ShirtsDropdown />
-            <AccessoriesDropdown />
-          </ul>
-
-          {/* Right: Icons */}
-          <ul
-            className="flex items-center gap-6 mobile:gap-3 h-full ml-auto"
-            role="list"
-          >
-            {navIcons.map(({ icon, href, title }) => {
-              const isActive = pathname === href;
-              return (
-                <li key={title}>
-                  <Link aria-label={title} href={href}>
-                    {React.isValidElement(icon) &&
-                      React.cloneElement(
-                        icon as React.ReactElement<{ className?: string }>,
-                        {
-                          className: `${
-                            (icon.props as { className?: string })?.className ||
-                            ""
-                          } ${isActive ? "text-foreground" : "text-muted"}`,
-                        }
-                      )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </nav>
+    <header 
+      className="fixed top-0 left-0 w-full z-[10000] bg-white flex flex-col overflow-x-hidden">
+     
+      <DesktopNav />
     </header>
   );
 }

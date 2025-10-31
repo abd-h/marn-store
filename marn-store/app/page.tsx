@@ -7,7 +7,7 @@ export default function Home() {
     <main className="contents">
       <MainNav />
       <OverlayLayer />
-      <div className="w-[70%] p-[4rem] outline mx-auto mt-[20%] flex flex-col items-center justify-around">
+      <div className="w-[70%] p-[4rem] outline mx-auto mt-[20%] mobile:mt-[40%] flex flex-col items-center justify-around">
         <h1 className="text-4xl text-center">marn.co.uk</h1>
         <p className="w-2/3 text-center py-4">
           This is the home page and It&apos;s were main content would
