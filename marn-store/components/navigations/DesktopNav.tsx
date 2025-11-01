@@ -37,7 +37,7 @@ export default function DesktopNav() {
                     viewBox="0 0 160 40"
                     role="img"
                     aria-label="Marn logo"
-                    className="fill-black dark:fill-white w-[160px] h-[40px] mobile:w-[120px] mobile:h-[30px] max-w-full"
+                    className="fill-black dark:fill-white w-[160px] h-[40px]  max-w-full"
                   >
                     <text
                       x="0"
@@ -70,7 +70,7 @@ export default function DesktopNav() {
 
               {/* Right: Icons */}
               <ul
-                className="flex items-center gap-6 mobile:gap-3 h-full"
+                className="flex items-center gap-6 h-full"
                 role="list"
               >
                 {navIcons.map(({ icon, href, title }) => {

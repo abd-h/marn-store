@@ -18,3 +18,8 @@ export const navIcons: NavIconItem[] = [
   { title: "Profile", href: "/account", icon: <ProfileIcon /> },
   { title: "Basket", href: "/basket", icon: <BasketIcon /> },
 ];
+export const mobileNavIcons: NavIconItem[] = [
+  { title: "Search", href: "#", icon: <SearchIcon /> },
+  { title: "Profile", href: "/account", icon: <ProfileIcon /> },
+  { title: "Basket", href: "/basket", icon: <BasketIcon /> },
+];

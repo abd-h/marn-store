@@ -1,1 +1,0 @@
-// Sliding left panel with nav items

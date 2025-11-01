@@ -7,11 +7,11 @@ export default function TopBar() {
     <header className="w-screen bg-newtral-100 text-[12px] text-black font-[600] border-b border-gray-300">
       <nav
         aria-label="Top navigation"
-        className="max-w-screen-2xl mx-auto flex justify-between items-center h-[40px] px-4 gap-2 tracking-[0.15em]"
+        className="max-w-screen-2xl mx-auto flex justify-between mobile:justify-center items-center h-[40px] px-4 gap-2 tracking-[0.15em]"
       >
         {/* Left section*/}
 
-        <ul className="flex flex-wrap justify-center h-full items-stretch role=list">
+        <ul className="mobile:hidden tablet:hidden  flex flex-wrap justify-center h-full items-stretch role=list">
           <li className="px-8 flex items-center h-full border-r-2 border-gray-300">
             <a
               href="#"
@@ -39,11 +39,11 @@ export default function TopBar() {
         </ul>
 
         {/* Central section*/}
-        <div className=" text-center" aria-live="polite">
+        <div className=" mobile:w-full text-center" aria-live="polite">
           <PromoTicker />
         </div>
         {/* Right section*/}
-        <ul className="flex flex-wrap justify-center md:justify-end h-full items-stretch  divide-x divide-gray-300 role=list ">
+        <ul className="mobile:hidden tablet:hidden flex flex-wrap justify-center md:justify-end h-full items-stretch  divide-x divide-gray-300 role=list ">
           <li className="px-8 flex items-center  border-l-2 border-gray-300">
             <a
               href="#"
