@@ -13,7 +13,7 @@ type SlidingPanelProps = {
   size?: string;
 };
 
-export default function SlidingPannel({
+export default function SlidingPanel({
   isOpen,
   onClose,
   children,
@@ -56,7 +56,7 @@ export default function SlidingPannel({
                 className={`fixed ${basePosition[direction]} ${dimensionClass} bg-white z-[9999] shadow-lg transition-transform duration-300 ${
                     isOpen ? activeTransform : baseTransform[direction]
             } `} >
-
+                {children}
             </div>
         </>
     )

@@ -1,16 +1,20 @@
 import MobileTopBar from "../topbar/MobileTopBar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { navIcons } from "../icons/nav/navIcons";
 import { mobileNavIcons } from "../icons/nav/navIcons";
 import { useHover } from "@/context/HoverContext";
 import React from "react";
 import { Menu } from "lucide-react";
+import MobileMenu from "./MobileMenu";
+import MobileMenuContent from "./MobileMenuContent";
 
 
 // Main wrapper: burger, logo, icons
 export default function MobileNav() {
   const pathname = usePathname();
+  const[menuOpen, setMenuOpen] = useState(false);
   const { hoveredCategory, setHoveredCategory, searchActive, setSearchActive } =
     useHover();
   return (
@@ -22,7 +26,7 @@ export default function MobileNav() {
         aria-label="Main navigation"
       >
         <div className="outline gap-4 max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full w-full">
-          <button className="">
+          <button onClick={() => setMenuOpen(true)} className="">
             {/* <Menu strokeWidth={0.5} className="w-12 h-12 text-foreground" /> */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -93,6 +97,9 @@ export default function MobileNav() {
           </ul>
         </div>
       </nav>
+      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
+        <MobileMenuContent />
+      </MobileMenu>
     </>
   );
 }

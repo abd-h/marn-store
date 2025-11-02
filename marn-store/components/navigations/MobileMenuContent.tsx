@@ -12,6 +12,7 @@ import CasualsDropdown from "../nav/CasualsDropdown";
 import TrousersDropdown from "../nav/TrousersDropdown";
 import ShirtsDropdown from "../nav/ShirtsDropdown";
 import Accessories from "../nav/Accessories";
+import { MobileNavItemClass } from "@/lib/styles";
 
 type NavItemKey =
   | "new-in"
@@ -83,7 +84,7 @@ export default function MobileMenuContent() {
             <li key={key}>
               <button
                 onClick={() => setActiveItem(key)}
-                className="text-left w-full"
+                className={`text-left w-full ${MobileNavItemClass}`}
               >
                 {label}
               </button>
