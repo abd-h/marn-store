@@ -25,7 +25,7 @@ export default function MobileNav() {
         onMouseLeave={() => setHoveredCategory(null)}
         aria-label="Main navigation"
       >
-        <div className="outline gap-4 max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full w-full">
+        <div className=" gap-4 max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full w-full">
           <button onClick={() => setMenuOpen(true)} className="">
             {/* <Menu strokeWidth={0.5} className="w-12 h-12 text-foreground" /> */}
             <svg

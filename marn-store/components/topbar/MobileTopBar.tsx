@@ -39,7 +39,7 @@ export default function MobileTopBar() {
           </ul> */}
 
           {/* Central section*/}
-          <div className="outline mobile:w-full text-center px-4" aria-live="polite">
+          <div className=" mobile:w-full text-center px-4" aria-live="polite">
             <PromoTicker />
           </div>
           {/* Right section*/}
