@@ -53,7 +53,7 @@ export default function SlidingPanel({
             />
             {/* Panel */}
             <div
-                className={`fixed ${basePosition[direction]} ${dimensionClass} bg-white z-[9999] shadow-lg transition-transform duration-300 ${
+                className={`fixed ${basePosition[direction]} ${dimensionClass} bg-white z-[9999] shadow-lg transition-transform duration-300 overflow-auto ${
                     isOpen ? activeTransform : baseTransform[direction]
             } `} >
                 {children}

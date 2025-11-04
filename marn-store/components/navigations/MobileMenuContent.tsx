@@ -13,6 +13,8 @@ import TrousersDropdown from "../nav/TrousersDropdown";
 import ShirtsDropdown from "../nav/ShirtsDropdown";
 import Accessories from "../nav/Accessories";
 import { MobileNavItemClass } from "@/lib/styles";
+import MobileDropdownBanner from "../MobileDropdownBanner";
+
 
 type NavItemKey =
   | "new-in"
@@ -37,29 +39,34 @@ const navItems: { key: NavItemKey; label: string }[] = [
 export default function MobileMenuContent() {
   const [activeItem, setActiveItem] = useState<NavItemKey>(null);
 
-  const renderSubmenu = () => {
-    switch (activeItem) {
-      case "new-in":
-        return <NewIn />;
-      case "suits":
-        return <SuitsDropdown />;
-      case "coats":
-        return <CoatDropdown />;
-      case "casuals":
-        return <CasualsDropdown />;
-      case "trousers":
-        return <TrousersDropdown />;
-      case "shirts":
-        return <ShirtsDropdown />;
-      case "accessories":
-        return <Accessories />;
-      default:
-        return null;
-    }
-  };
+//  const renderSubmenu = () => {
+//     switch (activeItem) {
+//       case "new-in":
+//         return <NewIn />;
+//       case "suits":
+//         return <SuitsDropdown />;
+//       case "coats":
+//         return <CoatDropdown />;
+//       case "casuals":
+//         return <CasualsDropdown />;
+//       case "trousers":
+//         return <TrousersDropdown />;
+//       case "shirts":
+//         return <ShirtsDropdown />;
+//       case "accessories":
+//         return <Accessories />;
+//       default:
+//         return null;
+//     }
+//   };
 
+  const renderSubmenu = () => {
+    if (!activeItem) return null;
+    return <MobileDropdownBanner category={activeItem} />;
+  }
+  
   return (
-    <div className="p-6">
+    <div className="p-6 h-full overflow-y-auto">
       {activeItem ? (
         <>
           {/* Submenu header */}
@@ -90,7 +97,8 @@ export default function MobileMenuContent() {
               </button>
             </li>
           ))}
-        </ul>
+          </ul>
+          
       )}
     </div>
   );

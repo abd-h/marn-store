@@ -12,7 +12,7 @@ export default function MobileMenu({ isOpen, onClose, children }: MobileMenuProp
       isOpen={isOpen}
       onClose={onClose}
       direction="left"
-      size="w-1/2"
+      size="w-2/3"
     >
       {children}
     </SlidingPanel>
