@@ -7,6 +7,7 @@ export interface NavIconProps {
  
 export type IconProp = {
     className?: string;
+    size?: "sm" | "md" | "lg";
 }
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> { 

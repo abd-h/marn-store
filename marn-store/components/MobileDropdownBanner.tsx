@@ -28,11 +28,12 @@ export default function MobileDropdownBanner({ category }: { category: string })
   }
 
   return (
-    <section className="px-4 py-6 space-y-6">
+    <section className=" px-4 py-6 space-y-6">
+     
       {sections.map(({ heading, links }) => (
-        <div className=" outline px-2" key={heading}>
+        <div className="w-full" key={heading}>
           <h3 className=" p-2 text-sm font-bold mb-2">{heading}</h3>
-          <ul className=" text-sm text-black tracking-wide">
+          <ul className="border-b-[1px] border-gray-300 w-full text-sm text-black tracking-wide pb-4">
             {" "}
             {links.map(({ label, href }) => (
               <li className=" p-2" key={label}>

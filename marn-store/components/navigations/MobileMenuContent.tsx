@@ -14,6 +14,8 @@ import ShirtsDropdown from "../nav/ShirtsDropdown";
 import Accessories from "../nav/Accessories";
 import { MobileNavItemClass } from "@/lib/styles";
 import MobileDropdownBanner from "../MobileDropdownBanner";
+import WishlistIcon from "../icons/nav/WishlistIcon";
+import ProfileIcon from "../icons/nav/ProfileIcon";
 
 
 type NavItemKey =
@@ -66,11 +68,11 @@ export default function MobileMenuContent() {
   }
   
   return (
-    <div className="p-6 h-full overflow-y-auto">
+    <div className="w-full px-2 py-6 h-full overflow-y-auto">
       {activeItem ? (
         <>
           {/* Submenu header */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className=" w-full flex items-center gap-2 mb-4">
             <button
               onClick={() => setActiveItem(null)}
               aria-label="Back to main menu"
@@ -86,19 +88,34 @@ export default function MobileMenuContent() {
           <div>{renderSubmenu()}</div>
         </>
       ) : (
-        <ul className="space-y-4 text-sm font-medium">
-          {navItems.map(({ key, label }) => (
-            <li key={key}>
-              <button
-                onClick={() => setActiveItem(key)}
-                className={`text-left w-full ${MobileNavItemClass}`}
-              >
-                {label}
-              </button>
-            </li>
-          ))}
+          <div>
+            {/* Moble menu icons */}
+          <div className="flex justify-between items-center  w-full border-b-[1px] border-gray-300">
+            {" "}
+            <div className="relative p-2 text-xs flex justify-start items-center w-1/3 ">
+              <span className="">GBP £</span>{" "}
+              <span className="absolute top-1 right-4 h-full">⌵</span>
+            </div>
+            <div className="flex justify-around p-4 w-1/2">
+              <WishlistIcon size="sm" />
+              <ProfileIcon size="sm" />
+            </div>
+          </div>
+
+          <ul className=" w-full text-sm font-light">
+            {navItems.map(({ key, label }) => (
+              <li className="py-4 border-b-[1px] border-gray-300" key={key}>
+                {/* Mobile menu navitems */}
+                <button
+                  onClick={() => setActiveItem(key)}
+                  className={`font-light p-2  text-left w-full ${MobileNavItemClass}`}
+                >
+                  {label}
+                </button>
+              </li>
+            ))}
           </ul>
-          
+        </div>
       )}
     </div>
   );
