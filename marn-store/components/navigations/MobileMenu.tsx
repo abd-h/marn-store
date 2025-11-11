@@ -1,4 +1,5 @@
 import SlidingPanel from "../overlays/SlidingPanel";
+import MobileMenuContent from "./MobileMenuContent";
 
 type MobileMenuProps = {
     isOpen: boolean;
@@ -12,9 +13,9 @@ export default function MobileMenu({ isOpen, onClose, children }: MobileMenuProp
       isOpen={isOpen}
       onClose={onClose}
       direction="left"
-      size="w-[80%]"
+      size="lg"
     >
-      {children}
+     <MobileMenuContent />
     </SlidingPanel>
   );
 }

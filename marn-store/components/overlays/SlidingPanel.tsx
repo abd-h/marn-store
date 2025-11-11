@@ -3,6 +3,8 @@
 
 import React from "react";
 
+type PanelSize = "sm" | "md" | "lg" | "full";
+
 type Direction = "left" | "right" | "top" | "bottom";
 
 type SlidingPanelProps = {
@@ -10,15 +12,23 @@ type SlidingPanelProps = {
   onClose: () => void;
   children: React.ReactNode;
   direction?: Direction;
-  size?: string;
+  size?: PanelSize;
 };
+
+const sizeMap: Record<PanelSize, string> = {
+  sm: "w-[300px]",
+  md: "w-[500px]", 
+  lg: "w-[80%]", 
+  full: "w-screen",
+}
+
 
 export default function SlidingPanel({
   isOpen,
   onClose,
   children,
   direction = "left",
-  size = "w-1/2",
+  size = "lg",
 }: SlidingPanelProps) {
 
   const basePosition = {
@@ -37,9 +47,12 @@ export default function SlidingPanel({
     
     const activeTransform = "translate-x-0 translate-y-0";
 
-    const dimensionClass =
-        direction === "top" || direction === "bottom" ? size : `${size} h-screen`;
+    // const dimensionClass =
+    //     direction === "top" || direction === "bottom" ? size : `${size} h-screen`;
     
+  const dimensionClass = direction === "top" || direction === "bottom"
+    ? `${sizeMap[size || "lg"]} h-[300px]`
+    : `${sizeMap[size || "lg"]} h-screen`;
     return (
         <>
             {/* Backdrop */}

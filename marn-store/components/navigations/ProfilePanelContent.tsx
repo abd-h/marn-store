@@ -20,7 +20,7 @@ export default function ProfilePanelContent({ onClose }: ProfilePanelContentProp
     return (
         <div className="flex flex-col h-screen w-screen bg-white" >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-300">
+            <div className="flex items-center justify-between p-4 border-b border-gray-300 w-[50%] mx-auto">
                 <h2 className="text-lg font-semibold tracking-wide" >Login</h2>
                 <button onClick={onClose}
                     aria-label="Close profile panel"

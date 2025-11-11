@@ -18,6 +18,7 @@ import WishlistIcon from "../icons/nav/WishlistIcon";
 import ProfileIcon from "../icons/nav/ProfileIcon";
 import SlidingPanel from "../overlays/SlidingPanel";
 import ProfilePanelContent from "@/components/navigations/ProfilePanelContent";
+import MobileOverlaysManager from "../overlays/MobileOverlaysManager";
 
 type NavItemKey =
   | "new-in"
@@ -28,6 +29,10 @@ type NavItemKey =
   | "shirts"
   | "accessories"
   | null;
+
+// type MobileMenuContentProps = {
+//   onOpenProfilePanel: () => void;
+// }  
 
 const navItems: { key: NavItemKey; label: string }[] = [
   { key: "new-in", label: "New In" },
@@ -125,15 +130,12 @@ export default function MobileMenuContent() {
           </ul>
         </div>
       )}
-      <SlidingPanel
-        isOpen={showProfilePanel}
-        onClose={() => setShowProfilePanel(false)}
-        direction="right"
-        size="full"
-      >
-        {" "}
-        {/* Profile panel content goes here */}
-        <ProfilePanelContent onClose={() => setShowProfilePanel(false)} />
+      
+      <SlidingPanel isOpen={showProfilePanel} onClose={() => setShowProfilePanel(false)}>
+        <ProfilePanelContent
+         
+          onClose={() => setShowProfilePanel(false)}
+        />
       </SlidingPanel>
     </div>
   );
