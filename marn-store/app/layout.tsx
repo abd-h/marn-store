@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { HoverProvider } from "@/context/HoverContext";
+import MobileOverlaysManager from "@/components/overlays/MobileOverlaysManager";
 
 
 const geistSans = Geist({
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* <MobileOverlaysManager /> */}
         <HoverProvider>
           <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)] font-sans contents">
             {children}

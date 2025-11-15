@@ -7,8 +7,9 @@ import { mobileNavIcons } from "../icons/nav/navIcons";
 import { useHover } from "@/context/HoverContext";
 import React from "react";
 import { Menu } from "lucide-react";
-import MobileMenu from "./MobileMenu";
+// import MobileMenu from "./MobileMenu";
 import MobileMenuContent from "./MobileMenuContent";
+import MobileOverlaysManager from "../overlays/MobileOverlaysManager";
 
 
 // Main wrapper: burger, logo, icons
@@ -97,9 +98,11 @@ export default function MobileNav() {
           </ul>
         </div>
       </nav>
-      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
+      {/* <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
         <MobileMenuContent />
-      </MobileMenu>
+      </MobileMenu> */}
+      {/* Overlay manager */}
+      <MobileOverlaysManager isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );
 }

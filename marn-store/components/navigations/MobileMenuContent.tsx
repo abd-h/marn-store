@@ -19,6 +19,7 @@ import ProfileIcon from "../icons/nav/ProfileIcon";
 import SlidingPanel from "../overlays/SlidingPanel";
 import ProfilePanelContent from "@/components/navigations/ProfilePanelContent";
 import MobileOverlaysManager from "../overlays/MobileOverlaysManager";
+import { on } from "events";
 
 type NavItemKey =
   | "new-in"
@@ -30,9 +31,9 @@ type NavItemKey =
   | "accessories"
   | null;
 
-// type MobileMenuContentProps = {
-//   onOpenProfilePanel: () => void;
-// }  
+type MobileMenuContentProps = {
+  onOpenProfilePanel: () => void;
+}  
 
 const navItems: { key: NavItemKey; label: string }[] = [
   { key: "new-in", label: "New In" },
@@ -44,7 +45,7 @@ const navItems: { key: NavItemKey; label: string }[] = [
   { key: "accessories", label: "Accessories" },
 ];
 
-export default function MobileMenuContent() {
+export default function MobileMenuContent({onOpenProfilePanel}: MobileMenuContentProps) {
   const [activeItem, setActiveItem] = useState<NavItemKey>(null);
   const [showProfilePanel, setShowProfilePanel] = useState(false);
 
@@ -109,7 +110,7 @@ export default function MobileMenuContent() {
             <div className="flex justify-around p-4 w-1/3">
               <WishlistIcon size="sm" />
               <ProfileIcon
-                onClick={() => setShowProfilePanel(true)}
+                onClick={onOpenProfilePanel}
                 size="sm"
               />
             </div>
@@ -131,12 +132,12 @@ export default function MobileMenuContent() {
         </div>
       )}
       
-      <SlidingPanel isOpen={showProfilePanel} onClose={() => setShowProfilePanel(false)}>
+      {/* <SlidingPanel isOpen={showProfilePanel} onClose={() => setShowProfilePanel(false)}>
         <ProfilePanelContent
          
           onClose={() => setShowProfilePanel(false)}
         />
-      </SlidingPanel>
+      </SlidingPanel> */}
     </div>
   );
 }
