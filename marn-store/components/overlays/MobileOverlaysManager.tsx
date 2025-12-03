@@ -4,7 +4,7 @@ import SlidingPanel from "./SlidingPanel";
 // import MobileMenu from "../navigations/MobileMenu";
 import MobileMenuContent from "../navigations/MobileMenuContent";
 import ProfilePanelContent from "../navigations/ProfilePanelContent";
-import { on } from "events";
+// import { on } from "events";
 
 type MobileOverlaysManagerProps = {
     isOpen: boolean;
@@ -13,7 +13,7 @@ type MobileOverlaysManagerProps = {
 }
 
 export default function MobileOverlaysManager({isOpen, onClose}: MobileOverlaysManagerProps) {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showProfilePanel, setShowProfilePanel] = useState(false);
 
     return (

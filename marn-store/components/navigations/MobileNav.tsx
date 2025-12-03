@@ -98,9 +98,7 @@ export default function MobileNav() {
           </ul>
         </div>
       </nav>
-      {/* <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
-        <MobileMenuContent />
-      </MobileMenu> */}
+     
       {/* Overlay manager */}
       <MobileOverlaysManager isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
