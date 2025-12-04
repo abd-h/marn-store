@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.545.0",

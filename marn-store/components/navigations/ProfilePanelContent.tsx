@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import DynamicForm from "../forms/DynamicForm";
 import { loginFields } from "../forms/loginFields";
+import { signupFields } from "../forms/SignupForm";
 
 type ProfilePanelContentProps = {
   onClose: () => void;
@@ -14,9 +15,8 @@ type ProfilePanelContentProps = {
 export default function ProfilePanelContent({
   onClose,
 }: ProfilePanelContentProps) {
-    const [formType, setFormType] = useState<"login" | "signup">("login");
   const router = useRouter();
-
+const [formType, setFormType] = useState<"login" | "signup">("login");
   function handleLogout() {
     // Replace this with the logout logic
     router.push("/login");
@@ -41,14 +41,34 @@ export default function ProfilePanelContent({
       <div className="flex-grow p-8 overflow-y-auto">
         {/* Register prompt */}
 
-        <p className="my-4 space-y-4 text-sm tracking-widest font-semibold">
-          Don&apos;t have an account?
-          <Link href="/register" className="px-2 hover:underline">
-            Sign up
-          </Link>
-        </p>
+        {formType === "login" ? (
+          <p className="my-4 space-y-4 text-sm tracking-widest font-semibold">
+            Don&apos;t have an account?
+            <span
+              onClick={() => setFormType("signup")}
+              className="px-2 hover:underline"
+            >
+              Sign up
+            </span>
+          </p>
+        ) : (
+          <p className="my-4 space-y-4 text-sm tracking-widest font-semibold">
+            Already have an account?
+            <span
+              onClick={() => setFormType("login")}
+              className="px-2 hover:underline"
+            >
+              Login
+            </span>
+          </p>
+        )}
         {/* Dynamic login or signup form */}
-        <DynamicForm fields={loginFields} buttonLabel="SIGN IN" />
+        {formType === "login" ? (
+          <DynamicForm fields={loginFields} buttonLabel="SIGN IN" />
+        ) : (
+          <DynamicForm fields={signupFields} buttonLabel="REGISTER" />
+        )}
+
         <p className="mt-2 font-semibold text-sm text-gray-600">
           <Link href="/reset-password" className=" hover:underline">
             Forgotten your password?
