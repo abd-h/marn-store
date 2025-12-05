@@ -4,7 +4,7 @@ export const signupFields: Field[] = [
   {
     id: "title",
     type: "select",
-    options: ["Title", "Mr", "Mrs", "Ms", "Dr", "Revd", "Prof"],
+    options: ["Mr", "Mrs", "Ms", "Dr", "Revd", "Prof"],
     required: true,
     placeholder: "Title",
   },
