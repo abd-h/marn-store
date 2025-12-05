@@ -1,25 +1,22 @@
 "use client";
 
 import {
-  ListboxButton,
   Listbox,
-  ListboxOption,
+  ListboxButton,
   ListboxOptions,
+  ListboxOption,
 } from "@headlessui/react";
-import { CheckIcon, ChevronsUpDownIcon, List } from "lucide-react";
+import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 import { useState } from "react";
 import { Field } from "./DynamicForm";
 
-type TitleSelectProps = {
-  field: Field[];
-  buttonLabel: string;
-}
+type SelectFieldProps = {
+  field: Field;
+};
 
-
-const titles = ["Mrl", "Mrs", "Ms", "Dr", "Prof"];
-
-export default function TitleSelect({field, buttonLabel}: TitleSelectProps) {
-  const [selected, setSelected] = useState(titles[0]);
+export default function SelectField({ field }: SelectFieldProps) {
+  // Default to first option
+  const [selected, setSelected] = useState(field.options?.[0] ?? "");
 
   return (
     <div className="relative w-full">
@@ -27,25 +24,39 @@ export default function TitleSelect({field, buttonLabel}: TitleSelectProps) {
         <div className="relative">
           {/* Button */}
           <ListboxButton
-            className="w-full border border-black rounded-sm px-3 py-3 text-sm bg-white text-gray-700 text-left focus:outline-none focus:ring-2 focus:ring-black focus:border-black flex justify-center items-center">
-            <span>{selected} </span>
+            className="w-full border border-black rounded-sm px-3 py-3 text-sm
+                       bg-white text-gray-700 text-left
+                       focus:outline-none focus:ring-2 focus:ring-black
+                       flex justify-between items-center"
+          >
+            <span>{selected || field.placeholder}</span>
             <ChevronsUpDownIcon className="h-5 w-5 text-gray-500" />
           </ListboxButton>
+
           {/* Options */}
-          <ListboxOptions className="absolute mt-1 max-h-60 w-full overflow-auto rounded-sm border border-black bg-white shadow-lg focus:outline-none z-20 " >
-            {fields.map((field) => (
+          <ListboxOptions
+            className="absolute mt-1 max-h-60 w-full overflow-auto
+                       rounded-sm border border-black bg-white shadow-lg
+                       focus:outline-none z-20"
+          >
+            {field.options?.map((option) => (
               <ListboxOption
-                key={field.id}
-                value={field}
-                className={({ active }) => ` cursor-pointer select-none px-4 py-2 text-sm ${active ? "bg-black text-white" : "text-gray-700"}`}>
+                key={option}
+                value={option}
+                className={({ active }) =>
+                  `cursor-pointer select-none px-4 py-2 text-sm ${
+                    active ? "bg-black text-white" : "text-gray-700"
+                  }`
+                }
+              >
                 {({ selected }) => (
                   <span className="flex justify-between items-center">
-                    {field.type}
+                    {option}
                     {selected && <CheckIcon className="h-4 w-4 text-black" />}
                   </span>
                 )}
-            </ListboxOption>
-          ))}
+              </ListboxOption>
+            ))}
           </ListboxOptions>
         </div>
       </Listbox>
@@ -86,10 +97,10 @@ export default function TitleSelect({field, buttonLabel}: TitleSelectProps) {
         )
       )}
       {/* Dynamic button*/
-    //   <button
-    //     type="submit"
-    //     className="uppercase w-full bg-black text-white text-sm font-bold tracking-widest p-4 transition-colors"
-    //   >
-    //     {buttonLabel}
-    //   </button>
-    // </form> */}
+//   <button
+//     type="submit"
+//     className="uppercase w-full bg-black text-white text-sm font-bold tracking-widest p-4 transition-colors"
+//   >
+//     {buttonLabel}
+//   </button>
+// </form> */}

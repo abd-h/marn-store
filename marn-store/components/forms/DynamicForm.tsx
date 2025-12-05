@@ -2,6 +2,7 @@
 import React, { useState} from "react";
 import { Listbox } from "@headlessui/react";
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
+import SelectField from "./TitleSelect";
 
 export type Field = {
   id: string;
@@ -21,24 +22,7 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
     <form className="space-y-4">
       {fields.map((field) =>
         field.type === "select" ? (
-          <div className="relative z-10 overflow-hidden" key={field.id}>
-            <select
-              id={field.id}
-              required={field.required}
-              className="mt-1 block w-full border border-black  shadow-sm p-4 focus:ring-black focus:outline-none focus:border-black placeholder:text-sm placeholder:tracking-wide
-                      appearance-none
-                      bg-white text-gray-700"
-            >
-              {field.options?.map((option) => (
-                <option className="text-xl" key={option} value={option === "Title" ? "" : option}>
-                  {option}{" "}
-                </option>
-              ))}
-            </select>
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
-              ▼
-            </span>
-          </div>
+          <SelectField key={field.id} field={field} />
         ) : (
           <input
             key={field.id}
@@ -46,7 +30,9 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
             type={field.type}
             placeholder={field.placeholder}
             required={field.required}
-            className="mt-1 block w-full border border-black  shadow-sm p-4 focus:ring-black focus:outline-none focus:border-black placeholder:text-sm placeholder:tracking-wide "
+            className="mt-1 block w-full border border-black shadow-sm p-4
+               focus:ring-black focus:outline-none focus:border-black
+               placeholder:text-sm placeholder:tracking-wide"
           />
         )
       )}
