@@ -1,8 +1,8 @@
 "use client";
 import React, { useState} from "react";
-import { Listbox } from "@headlessui/react";
-import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
+
 import SelectField from "./TitleSelect";
+import InputField from "./InputField";
 
 export type Field = {
   id: string;
@@ -18,23 +18,23 @@ type DynamicFormProps = {
 };
 
 export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Handle form submission logic here
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    console.log("Form submission:", data);
+  }
   return (
-    <form className="space-y-4">
-      {fields.map((field) =>
-        field.type === "select" ? (
-          <SelectField key={field.id} field={field} />
-        ) : (
-          <input
-            key={field.id}
-            id={field.id}
-            type={field.type}
-            placeholder={field.placeholder}
-            required={field.required}
-            className="mt-1 block w-full border border-black shadow-sm p-4
-               focus:ring-black focus:outline-none focus:border-black
-               placeholder:text-sm placeholder:tracking-wide"
-          />
-        )
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      {fields.map((field) => {
+        if (field.type === "select") {
+          return <SelectField key={field.id} field={field} />
+        }
+        return <InputField key={field.id} field={field} />
+      }
+       
       )}
       {/* Dynamic button*/}
       <button

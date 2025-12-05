@@ -6,7 +6,7 @@ import {
   ListboxOptions,
   ListboxOption,
 } from "@headlessui/react";
-import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
+import { CheckIcon, ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 import { Field } from "./DynamicForm";
 
@@ -34,10 +34,12 @@ export default function SelectField({ field }: SelectFieldProps) {
                        flex justify-between items-center
                         `}
           >
-            <span className={!selected ? "text-black text-sm tracking-widest" : ""}>
+            <span
+              className={!selected ? "text-black text-sm tracking-widest" : ""}
+            >
               {selected || field.placeholder}
             </span>
-            <ChevronsUpDownIcon className="h-5 w-5 text-gray-500" />
+            <ChevronDownIcon className="h-5 w-5 text-gray-500" />
           </ListboxButton>
 
           {/* Options */}
@@ -67,6 +69,7 @@ export default function SelectField({ field }: SelectFieldProps) {
             ))}
           </ListboxOptions>
         </div>
+        <input type="hidden" name={field.id} value={selected ?? ""} />
       </Listbox>
     </div>
   );
