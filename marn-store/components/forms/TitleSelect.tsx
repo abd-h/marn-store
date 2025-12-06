@@ -12,9 +12,10 @@ import { Field } from "./DynamicForm";
 
 type SelectFieldProps = {
   field: Field;
+  error?: string; // although error is not used in this component, it's kept for consistency
 };
 
-export default function SelectField({ field }: SelectFieldProps) {
+export default function SelectField({ field, error }: SelectFieldProps) {
   // Default to first option
   const [selected, setSelected] = useState<string | null>(null);
   
@@ -71,6 +72,7 @@ export default function SelectField({ field }: SelectFieldProps) {
         </div>
         <input type="hidden" name={field.id} value={selected ?? ""} />
       </Listbox>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }

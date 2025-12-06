@@ -4,14 +4,15 @@ import React from "react";
 import { Field } from "./DynamicForm";
 
 type InputFieldProps = {
-    field: Field;
-    error?: string;
+  field: Field;
+  error?: string;
 };
 
 export default function InputField({ field, error }: InputFieldProps) {
   return (
     <div className="w-full">
       <input
+        id={field.id}
         type={field.type}
         name={field.id}
         placeholder={field.placeholder}
