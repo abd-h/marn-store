@@ -9,7 +9,7 @@ export const signupFields: Field[] = [
     placeholder: "Title",
   },
   { id: "FirstName", type: "text", placeholder: "First name *", required: true },
-  { id: "LastLame", type: "text", placeholder: "Last name *", required: true },
+  { id: "LastName", type: "text", placeholder: "Last name *", required: true },
   { id: "email", type: "email", placeholder: "Email *", required: true },
   { id: "password", type: "password", placeholder: "Password *", required: true },
   {

@@ -16,6 +16,17 @@ describe("validateName with international support", () => {
     expect(validateName("Ab1")).toBe(false);
     expect(validateName("Ab@")).toBe(false);
   });
+    
+    it("rejects names with digits", () => {
+      expect(validateName("Hussein9")).toBe(false);
+      expect(validateName("Anna123")).toBe(false);
+    });
+
+    it("accepts names with accents and hyphens", () => {
+      expect(validateName("Jean-Luc")).toBe(true);
+      expect(validateName("O’Connor")).toBe(true);
+    });
+
 });
 
 
