@@ -18,13 +18,13 @@ export type Field = {
   options?: string[]; // only used for select fields
 };
 
-export type FieldId = 
+export type FieldId =
   | "FirstName"
   | "LastName"
   | "email"
   | "password"
   | "confirmPassword"
-  | "title";  
+  | "title";
 
 type DynamicFormProps = {
   fields: Field[];
@@ -46,69 +46,67 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
     title: null,
   });
 
+const validators: Record<FieldId, (val: string) => string | undefined> = {
+  FirstName: (val) =>
+    !validateName(val) ? "First name is invalid." : undefined,
+
+  LastName: (val) => (!validateName(val) ? "Last name is invalid." : undefined),
+
+  email: (val) => {
+    const normalized = normalizeEmail(val);
+    return !normalized ? "Email is invalid." : undefined;
+  },
+
+  password: (val) =>
+    !validatePassword(val)
+      ? "Password must be 6+ chars, include uppercase and special character."
+      : undefined,
+
+  confirmPassword: (val) => {
+    const passwordValue = fieldRefs.current.password?.value ?? "";
+    return val !== passwordValue ? "Passwords do not match." : undefined;
+  },
+
+  title: (val) => (!val ? "Please select a title." : undefined),
+};
+
 
 
   // Form submission handler
- const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-   e.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-   const formData = new FormData(e.currentTarget);
-   const data: Record<string, string> = Object.fromEntries(
-     Array.from(formData.entries()).map(([key, value]) => [key, String(value)])
-   );
+    const formData = new FormData(e.currentTarget);
+    const data: Record<string, string> = Object.fromEntries(
+      Array.from(formData.entries()).map(([key, value]) => [key, String(value)])
+    );
 
-   const newErrors: Partial<Record<FieldId, string>> = {};
+    const newErrors: Partial<Record<FieldId, string>> = {};
 
-   // Validation
-   if (!validateName(data.FirstName)) {
-     newErrors.FirstName = "First name is invalid.";
-   }
-   if (!validateName(data.LastName)) {
-     newErrors.LastName = "Last name is invalid.";
-   }
-   if (!validatePassword(data.password)) {
-     newErrors.password =
-       "Password must be 6 characters or more and contain at least one uppercase letter and one special character.";
-   }
-   if (data.password !== data.confirmPassword) {
-     newErrors.confirmPassword = "Passwords do not match.";
-   }
-   if (!data.title) {
-     newErrors.title = "Please select a title.";
-   }
+    // Run validators for each field
+    (Object.keys(validators) as FieldId[]).forEach((id) => {
+      const value = data[id] ?? "";
+      const error = validators[id](value);
+      if (error) newErrors[id] = error;
+    });
 
-   // Early exit if errors
-   if (Object.keys(newErrors).length > 0) {
-     setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
 
-     const firstInvalidKey = Object.keys(newErrors)[0] as FieldId;
-     const firstInvalidRef = fieldRefs.current[firstInvalidKey];
-     if (firstInvalidRef) {
-       firstInvalidRef.focus();
-     }
-     return;
-   }
+      const firstInvalidKey = Object.keys(newErrors)[0] as FieldId;
+      const firstInvalidRef = fieldRefs.current[firstInvalidKey];
+      if (firstInvalidRef) firstInvalidRef.focus();
+      return;
+    }
 
-   // Email normalization
-   const normalized = normalizeEmail(data.email);
-   if (!normalized) {
-     newErrors.email = "Email is invalid.";
-     setErrors(newErrors);
-
-     const firstInvalidKey = Object.keys(newErrors)[0] as FieldId;
-     const firstInvalidRef = fieldRefs.current[firstInvalidKey];
-     if (firstInvalidRef) {
-       firstInvalidRef.focus();
-     }
-     return;
-   }
-
-   // Success path
-   console.log("Form submission:", data);
-   console.log("Normalized email:", normalized);
- };
+    // Success path
+    const normalized = normalizeEmail(data.email);
+    console.log("Form submission:", data);
+    console.log("Normalized email:", normalized);
+  };
 
 
+  // Handle field change to clear errors
   const handleFieldChange = (id: FieldId) => {
     if (errors[id]) {
       setErrors((prev) => {
@@ -118,6 +116,13 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
       });
     }
   };
+
+  // Handle blur event to validate email field
+ const handleFieldBlur = (id: FieldId, value: string) => {
+   const error = validators[id](value);
+   setErrors((prev) => ({ ...prev, [id]: error }));
+ };
+
 
 
   return (
@@ -144,6 +149,7 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
               error={errors[field.id as FieldId]}
               inputRef={refCallback}
               onChange={() => handleFieldChange(field.id as FieldId)}
+              onBlur={handleFieldBlur}
             />
           );
         }
@@ -154,6 +160,7 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
             error={errors[field.id as FieldId]}
             inputRef={refCallback}
             onChange={() => handleFieldChange(field.id as FieldId)}
+            onBlur={handleFieldBlur}
           />
         );
       })}

@@ -8,14 +8,16 @@ type InputFieldProps = {
   field: Field;
   error?: string;
   inputRef?: (el: HTMLInputElement | null) => void;
-  onChange?: (id: FieldId) => void;
+    onChange?: (id: FieldId) => void;
+    onBlur?: (id: FieldId, value: string) => void;
 };
 
 export default function InputField({
   field,
   error,
   inputRef,
-  onChange,
+    onChange,
+  onBlur,
 }: InputFieldProps) {
   return (
     <div className="w-full">
@@ -26,7 +28,8 @@ export default function InputField({
         name={field.id}
         placeholder={field.placeholder}
         required={field.required}
-        onChange={() => onChange?.(field.id as FieldId)}
+              onChange={() => onChange?.(field.id as FieldId)}
+              onBlur={(e) => onBlur?.(field.id as FieldId, e.target.value)}
         aria-invalid={!!error}
         aria-describedby={error ? `${field.id}-error` : undefined}
         className="w-full border border-black p-4 text-sm rounded-sm"

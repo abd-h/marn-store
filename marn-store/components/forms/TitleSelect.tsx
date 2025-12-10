@@ -15,6 +15,7 @@ type SelectFieldProps = {
   error?: string;
   inputRef?: (el: HTMLInputElement | null) => void;
   onChange?: (id: FieldId) => void;
+  onBlur?: (id: FieldId, value: string) => void;
 };
 
 export default function SelectField({
@@ -22,6 +23,7 @@ export default function SelectField({
   error,
   inputRef,
   onChange,
+  onBlur
 }: SelectFieldProps) {
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -74,6 +76,7 @@ export default function SelectField({
           ref={inputRef}
           type="hidden"
           value={selected ?? ""}
+          onBlur={(e) => onBlur?.(field.id as FieldId, e.target.value)}
         />
       </Listbox>
       {error && (
