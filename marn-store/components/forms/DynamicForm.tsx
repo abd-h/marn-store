@@ -1,6 +1,9 @@
 "use client";
 import React, { useRef, useState } from "react";
 
+import { validators as baseValidators } from "@/lib/fieldValidators";
+
+
 import SelectField from "./TitleSelect";
 import InputField from "./InputField";
 import {
@@ -46,29 +49,29 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
     title: null,
   });
 
-const validators: Record<FieldId, (val: string) => string | undefined> = {
-  FirstName: (val) =>
-    !validateName(val) ? "First name is invalid." : undefined,
+// const validators: Record<FieldId, (val: string) => string | undefined> = {
+//   FirstName: (val) =>
+//     !validateName(val) ? "First name is invalid." : undefined,
 
-  LastName: (val) => (!validateName(val) ? "Last name is invalid." : undefined),
+//   LastName: (val) => (!validateName(val) ? "Last name is invalid." : undefined),
 
-  email: (val) => {
-    const normalized = normalizeEmail(val);
-    return !normalized ? "Email is invalid." : undefined;
-  },
+//   email: (val) => {
+//     const normalized = normalizeEmail(val);
+//     return !normalized ? "Email is invalid." : undefined;
+//   },
 
-  password: (val) =>
-    !validatePassword(val)
-      ? "Password must be 6+ chars, include uppercase and special character."
-      : undefined,
+//   password: (val) =>
+//     !validatePassword(val)
+//       ? "Password must be 6+ chars, include uppercase and special character."
+//       : undefined,
 
-  confirmPassword: (val) => {
-    const passwordValue = fieldRefs.current.password?.value ?? "";
-    return val !== passwordValue ? "Passwords do not match." : undefined;
-  },
+//   confirmPassword: (val) => {
+//     const passwordValue = fieldRefs.current.password?.value ?? "";
+//     return val !== passwordValue ? "Passwords do not match." : undefined;
+//   },
 
-  title: (val) => (!val ? "Please select a title." : undefined),
-};
+//   title: (val) => (!val ? "Please select a title." : undefined),
+// };
 
 
 
@@ -108,19 +111,31 @@ const validators: Record<FieldId, (val: string) => string | undefined> = {
 
   // Handle field change to clear errors
   const handleFieldChange = (id: FieldId) => {
-    if (errors[id]) {
-      setErrors((prev) => {
-        const updated = { ...prev };
-        delete updated[id];
-        return updated;
-      });
-    }
+    setErrors((prev) => {
+      const { [id]: _, ...rest } = prev;
+      return rest;
+    });
   };
+
 
   // Handle blur event to validate email field
  const handleFieldBlur = (id: FieldId, value: string) => {
    const error = validators[id](value);
    setErrors((prev) => ({ ...prev, [id]: error }));
+ };
+
+  // Extended validators including confirmPassword
+
+ const validators: Record<FieldId, (val: string) => string | undefined> = {
+   FirstName: baseValidators.FirstName!,
+   LastName: baseValidators.LastName!,
+   email: baseValidators.email!,
+   password: baseValidators.password!,
+   title: baseValidators.title!,
+   confirmPassword: (val: string) => {
+     const passwordValue = fieldRefs.current.password?.value ?? "";
+     return val !== passwordValue ? "Passwords do not match." : undefined;
+   },
  };
 
 

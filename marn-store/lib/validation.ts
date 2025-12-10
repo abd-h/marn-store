@@ -2,10 +2,11 @@ import { domainToASCII } from "url";
 import punycode from "punycode";
 
 export function validateName(name: string): boolean {
-  const allowed = /^[\p{L}\p{M}\s'-]+$/u;
-  const forbidden = /[\d_]/;
-  return allowed.test(name) && !forbidden.test(name);
+  // Allow Unicode letters, hyphens, and apostrophes
+  const regex = /^[\p{L}]+(?:[-'\u2019][\p{L}]+)*$/u;
+  return regex.test(name) && name.length >= 3;
 }
+
 
 
 

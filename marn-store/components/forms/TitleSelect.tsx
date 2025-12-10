@@ -36,51 +36,64 @@ export default function SelectField({
           onChange?.(field.id as FieldId);
         }}
       >
-        <div className="relative">
-          <ListboxButton
-            aria-invalid={!!error}
-            aria-describedby={error ? `${field.id}-error` : undefined}
-            className="w-full border border-black p-4 text-sm bg-white text-gray-700 text-left flex justify-between items-center"
-          >
-            <span
-              className={!selected ? "text-black text-sm tracking-widest" : ""}
-            >
-              {selected || field.placeholder}
-            </span>
-            <ChevronDownIcon className="h-5 w-5 text-gray-500" />
-          </ListboxButton>
-
-          <ListboxOptions className="absolute max-h-60 w-full border border-black bg-white shadow-lg overflow-auto rounded-sm z-20">
-            {field.options?.map((option) => (
-              <ListboxOption
-                key={option}
-                value={option}
-                className={({ focus, selected }) =>
-                  `cursor-pointer select-none px-4 py-2 text-sm ${
-                    focus ? "bg-[#f1f1f1]" : "text-black"
-                  } ${selected ? "font-semibold" : "font-normal"}`
-                }
+        {({ open }) => (
+          <>
+            <div className="relative">
+              <ListboxButton
+                aria-invalid={!!error}
+                aria-describedby={error ? `${field.id}-error` : undefined}
+                className={`w-full border border-black p-4 text-sm bg-white text-gray-700 text-left flex justify-between items-center ${open? "border-b-0" : "border-black"}`}
               >
-                {({ selected }) => (
-                  <span className="flex justify-between items-center">
-                    {option}
-                    {selected && <CheckIcon className="h-4 w-4 text-black" />}
-                  </span>
-                )}
-              </ListboxOption>
-            ))}
-          </ListboxOptions>
-        </div>
-        <input
-          name={field.id}
-          ref={inputRef}
-          type="hidden"
-          value={selected ?? ""}
-          onBlur={(e) => onBlur?.(field.id as FieldId, e.target.value)}
-        />
+                <span
+                  className={
+                    !selected ? "text-black text-sm tracking-widest" : ""
+                  }
+                >
+                  {selected || field.placeholder}
+                </span>
+                <ChevronDownIcon strokeWidth={0.8} className={`h-8 w-8 text-black font-thin transition-transform
+                  ${open? "rotate-180": "rotate-0"}`} />
+              </ListboxButton>
+
+              <ListboxOptions className="absolute max-h-64 pb-4 w-full border border-black border-t-0 bg-white shadow-lg overflow-auto rounded-sm z-20">
+                {field.options?.map((option) => (
+                  <ListboxOption
+                    key={option}
+                    value={option}
+                    className={({ focus, selected }) =>
+                      `cursor-pointer select-none px-4 py-2 my-3 text-sm ${
+                        focus ? "bg-[#f5f5f5]" : "text-black"
+                      } ${selected ? "font-semibold" : "font-normal"}`
+                    }
+                  >
+                    {({ selected }) => (
+                      <span className="flex justify-between items-center">
+                        {option}
+                        {selected && (
+                          <CheckIcon className="h-4 w-4 text-black" />
+                        )}
+                      </span>
+                    )}
+                  </ListboxOption>
+                ))}
+              </ListboxOptions>
+            </div>
+            <input
+              name={field.id}
+              ref={inputRef}
+              type="hidden"
+              value={selected ?? ""}
+              onBlur={(e) => onBlur?.(field.id as FieldId, e.target.value)}
+            />
+          </>
+        )}
       </Listbox>
       {error && (
-        <p id={`${field.id}-error`} className="text-red-500 text-sm mt-1">
+        <p
+          role="alert"
+          id={`${field.id}-error`}
+          className="text-red-500 text-sm mt-1"
+        >
           {error}
         </p>
       )}

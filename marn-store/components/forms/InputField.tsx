@@ -35,7 +35,7 @@ export default function InputField({
         className="w-full border border-black p-4 text-sm rounded-sm"
       />
       {error && (
-        <p id={`${field.id}-error`} className="text-red-600 text-sm mt-1">
+        <p role="alert" id={`${field.id}-error`} className="text-red-600 text-sm mt-1">
           {error}
         </p>
       )}
