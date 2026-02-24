@@ -23,7 +23,7 @@ export default function SelectField({
   error,
   inputRef,
   onChange,
-  onBlur
+  onBlur,
 }: SelectFieldProps) {
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -35,6 +35,7 @@ export default function SelectField({
           setSelected(value);
           onChange?.(field.id as FieldId);
         }}
+        name={field.name}
       >
         {({ open }) => (
           <>

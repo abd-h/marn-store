@@ -12,6 +12,8 @@ import {
   validateName,
   validatePassword,
 } from "@/lib/validation";
+import Button from "../ui/Button";
+import { on } from "events";
 
 export type Field = {
   id: string;
@@ -19,6 +21,7 @@ export type Field = {
   placeholder: string;
   required?: boolean;
   options?: string[]; // only used for select fields
+  name?: string // added name property for form data mapping;
 };
 
 export type FieldId =
@@ -32,9 +35,10 @@ export type FieldId =
 type DynamicFormProps = {
   fields: Field[];
   buttonLabel: string;
+  onSubmit: (data: Record<string, string>) => void;
 };
 
-export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
+export default function DynamicForm({ fields, buttonLabel, onSubmit}: DynamicFormProps) {
   // State to hold form errors
   const [errors, setErrors] = useState<Partial<Record<FieldId, string>>>({});
 
@@ -103,6 +107,7 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
     }
 
     // Success path
+    onSubmit(data);
     const normalized = normalizeEmail(data.email);
     console.log("Form submission:", data);
     console.log("Normalized email:", normalized);
@@ -165,6 +170,7 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
               inputRef={refCallback}
               onChange={() => handleFieldChange(field.id as FieldId)}
               onBlur={handleFieldBlur}
+              
             />
           );
         }
@@ -181,12 +187,7 @@ export default function DynamicForm({ fields, buttonLabel }: DynamicFormProps) {
       })}
 
       {/* Dynamic button*/}
-      <button
-        type="submit"
-        className="uppercase w-full bg-black text-white text-sm font-bold tracking-widest p-4 transition-colors"
-      >
-        {buttonLabel}
-      </button>
+     <Button buttonLabel={buttonLabel} type="submit" />
     </form>
   );
 }

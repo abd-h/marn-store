@@ -8,9 +8,6 @@ export function validateName(name: string): boolean {
 }
 
 
-
-
-
 export function validatePassword(password: string): boolean {
   const lengthOK = password.length >= 6;
 
